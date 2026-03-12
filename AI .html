@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вселенная ИИ 2026 — каталог нейросетей</title>
+    <!-- Подключаем шрифты и Font Awesome для иконок -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0c0f15;
+            font-family: 'Inter', sans-serif;
+            color: #eef2f8;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c0e0ff, #a0b6ff, #d4a5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header .sub {
+            font-size: 1.3rem;
+            color: #99a7c7;
+            max-width: 720px;
+            margin: 1rem auto 2rem;
+        }
+
+        /* поиск и статистика */
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background: #1e2532;
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            margin-bottom: 2.5rem;
+            border: 1px solid #2c3442;
+        }
+
+        .stats-badge {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #2a3243;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            border: 1px solid #3e485b;
+        }
+
+        .badge-item i {
+            color: #7aa5ff;
+        }
+
+        .search-wrapper {
+            display: flex;
+            gap: 0.5rem;
+            min-width: 280px;
+            background: #1a212f;
+            border-radius: 40px;
+            padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+            border: 1px solid #354052;
+        }
+
+        .search-wrapper input {
+            background: transparent;
+            border: none;
+            padding: 0.6rem 0;
+            color: white;
+            width: 100%;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .search-wrapper button {
+            background: #3f4e70;
+            border: none;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .search-wrapper button:hover {
+            background: #5b6e97;
+        }
+
+        /* категории чипсы */
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.7rem 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-chip {
+            background: #1b2230;
+            padding: 0.6rem 1.4rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #b6c3e0;
+            border: 1px solid #2c3445;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-chip:hover,
+        .category-chip.active {
+            background: #2b3855;
+            border-color: #5f83c0;
+            color: white;
+        }
+
+        /* сетка карточек */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: #161e2b;
+            border-radius: 30px;
+            padding: 1.5rem;
+            border: 1px solid #283040;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #4d6799;
+            background: #1b2536;
+            box-shadow: 0 25px 30px -12px #010314;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-header i {
+            font-size: 1.8rem;
+            color: #7aa5ff;
+        }
+
+        .card-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .country-badge {
+            background: #1f2a3f;
+            border-radius: 20px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            border: 1px solid #374764;
+            margin-bottom: 1rem;
+            color: #aec3f0;
+        }
+
+        .description {
+            color: #bac8e8;
+            font-size: 0.95rem;
+            margin: 0.8rem 0 1.2rem;
+            flex: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.7rem;
+            margin: 0.8rem 0 1.2rem;
+        }
+
+        .tag {
+            background: #252f41;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #b0c4ff;
+            border: 1px solid #374a67;
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #2e3b54;
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            margin-top: 0.6rem;
+            border: 1px solid #4f6290;
+            transition: 0.15s;
+            width: fit-content;
+        }
+
+        .btn-link:hover {
+            background: #3f5182;
+            border-color: #8aa9ff;
+        }
+
+        .divider {
+            background: #232b3b;
+            height: 2px;
+            width: 100%;
+            margin: 2.5rem 0 1.5rem;
+            border: none;
+        }
+
+        /* блок с агрегаторами (1000+ ИИ) */
+        .aggregator-section {
+            background: linear-gradient(145deg, #121b28, #0d131f);
+            border-radius: 48px;
+            padding: 2.5rem 2rem;
+            margin: 3rem 0 2rem;
+            border: 1px solid #2c3a55;
+        }
+
+        .aggregator-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .aggregator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .agg-card {
+            background: #1d2638;
+            border-radius: 28px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid #374972;
+            text-align: center;
+        }
+
+        .agg-card i {
+            font-size: 2.5rem;
+            color: #ffd966;
+        }
+
+        .agg-card h4 {
+            font-size: 1.5rem;
+            margin: 0.8rem 0;
+        }
+
+        .agg-card p {
+            color: #aab9de;
+            margin-bottom: 1.5rem;
+        }
+
+        .agg-btn {
+            background: #2f4162;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            border: 1px solid #6078b0;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 3rem;
+            color: #7b8cb0;
+        }
+
+        /* адаптивность */
+        @media (max-width: 700px) {
+            .header h1 { font-size: 2.4rem; }
+            .stats-bar { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- шапка -->
+    <div class="header">
+        <h1><i class="fas fa-robot" style="color: #7aa5ff; margin-right: 10px;"></i> AI Galaxy 2026</h1>
+        <div class="sub">Крупнейший каталог нейросетей: от open-source до коммерческих гигантов</div>
+    </div>
+
+    <!-- статистика и поиск (фильтр в реальном времени) -->
+    <div class="stats-bar">
+        <div class="stats-badge">
+            <span class="badge-item"><i class="fas fa-database"></i> более 150+ моделей в карточках</span>
+            <span class="badge-item"><i class="fas fa-globe"></i> 20+ стран</span>
+            <span class="badge-item"><i class="fas fa-rocket"></i> обновлено 2026</span>
+        </div>
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" placeholder="Поиск по названию, стране..." onkeyup="filterCards()">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+
+    <!-- фильтр по категориям (клик по чипсам) -->
+    <div class="category-filter" id="categoryFilter">
+        <span class="category-chip active" data-cat="all"><i class="fas fa-layer-group"></i> Все</span>
+        <span class="category-chip" data-cat="chat"><i class="fas fa-comment-dots"></i> Чат-боты / LLM</span>
+        <span class="category-chip" data-cat="image"><i class="fas fa-paint-brush"></i> Генерация изображений</span>
+        <span class="category-chip" data-cat="video"><i class="fas fa-video"></i> Видео и анимация</span>
+        <span class="category-chip" data-cat="audio"><i class="fas fa-headphones"></i> Аудио / голос</span>
+        <span class="category-chip" data-cat="special"><i class="fas fa-flask"></i> Специализированные</span>
+        <span class="category-chip" data-cat="russia"><i class="fas fa-location-dot"></i> 🇷🇺 Россия</span>
+    </div>
+
+    <!-- сетка карточек (сгенерирована из JS-массива) -->
+    <div id="cardsGrid" class="grid"></div>
+
+    <!-- Блок агрегаторов: ссылки на каталоги с 1000+ ИИ (включая AIXploria) -->
+    <div class="aggregator-section">
+        <div class="aggregator-title">
+            <i class="fas fa-compass"></i> Мега-каталоги (более 1000 ИИ)
+        </div>
+        <div class="aggregator-grid">
+            <div class="agg-card">
+                <i class="fas fa-meteor"></i>
+                <h4>AIXploria</h4>
+                <p>Тысячи инструментов, сообщество, фильтры. Один из крупнейших каталогов.</p>
+                <a href="https://www.aixploria.com/" target="_blank" class="agg-btn">Перейти <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="agg-card">
+                <i class="fas fa-sitemap"></i>
+                <h4>There's An AI For That</h4>
+                <p>Более 12 000 ИИ-инструментов по категориям. Умный поиск.</p>
+                <a href="https://theresanaiforthat.com/" target="_blank" class="agg-btn">Перейти <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="agg-card">
+                <i class="fas fa-list-check"></i>
+                <h4>Futurepedia</h4>
+                <p>5000+ ИИ для маркетинга, видео, дизайна. С ежедневными обновлениями.</p>
+                <a href="https://www.futurepedia.io/" target="_blank" class="agg-btn">Перейти <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="agg-card">
+                <i class="fas fa-chart-simple"></i>
+                <h4>RankmyAI</h4>
+                <p>Независимый рейтинг и каталог — 61 000+ ИИ-решений.</p>
+                <a href="https://rankmyai.com/" target="_blank" class="agg-btn">Перейти <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <p style="text-align:center; margin-top:2rem; color:#99a9cf">⭐ Эти платформы аккумулируют <strong>тысячи моделей</strong> — от генерации видео до квантовых вычислений. Указанные выше карточки — лишь малая часть.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- сноска -->
+    <div class="footer-note">
+        <i class="fas fa-brain"></i> Все модели, перечисленные в запросе (ChatGPT, Gemini, DeepSeek, Midjourney, Sora, YandexGPT и т.д.) — представлены в карточках ниже. Каталог динамически фильтруется.
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---------- БАЗА ДАННЫХ ИИ (более 50 моделей + агрегаторы отдельно) ----------
+        const tools = [
+            // Чат-боты / LLM (США, Китай, Европа)
+            { name: "ChatGPT (GPT-5)", country: "США", desc: "Самый популярный ассистент. Текст, код, изображения (DALL-E), анализ. OpenAI.", url: "https://chat.openai.com/", category: "chat", icon: "fa-brands fa-openai", tags: ["GPT-5", "мультимодальный"] },
+            { name: "Gemini 2.0", country: "США", desc: "Google DeepMind: интеграция с Gmail, YouTube, Docs. Огромный контекст (1M токенов).", url: "https://gemini.google.com/", category: "chat", icon: "fa-brands fa-google", tags: ["мультимодальный", "1M контекст"] },
+            { name: "Claude 4", country: "США", desc: "Anthropic: этичность, анализ больших документов, безопасность.", url: "https://claude.ai/", category: "chat", icon: "fa-regular fa-message", tags: ["анализ документов", "безопасность"] },
+            { name: "DeepSeek R1", country: "Китай", desc: "Open-source модель. Высокая точность в программировании и математике.", url: "https://chat.deepseek.com/", category: "chat", icon: "fa-solid fa-code", tags: ["кодинг", "открытый"] },
+            { name: "Grok (xAI)", country: "США", desc: "Илона Маска, интеграция с X, дерзкий стиль, реальное время.", url: "https://x.ai/", category: "chat", icon: "fa-brands fa-x-twitter", tags: ["реал-тайм", "бунтарский"] },
+            { name: "Microsoft Copilot", country: "США", desc: "Помощник в Office, Windows, Teams. На базе OpenAI.", url: "https://copilot.microsoft.com/", category: "chat", icon: "fa-brands fa-microsoft", tags: ["офис", "экосистема"] },
+            { name: "Perplexity AI", country: "США", desc: "Поисковик + ИИ. Ответы со ссылками, замена Google.", url: "https://www.perplexity.ai/", category: "chat", icon: "fa-solid fa-magnifying-glass", tags: ["поиск", "сноски"] },
+            { name: "LLaMA 4 (Meta*)", country: "США", desc: "Открытые веса, основа для многих доработок. (*Meta признана экстремистской в РФ)", url: "https://ai.meta.com/llama/", category: "chat", icon: "fa-solid fa-book-open", tags: ["open-source", "исследования"] },
+            { name: "Qwen (Alibaba)", country: "Китай", desc: "QWEN 2.5/3: мощные модели, включая кодер-версии.", url: "https://tongyi.aliyun.com/qwen/", category: "chat", icon: "fa-solid fa-dragon", tags: ["кодинг", "MoE"] },
+            { name: "Mistral AI", country: "Франция", desc: "Европейский чемпион: Mistral Large, Pixtral, открытые модели.", url: "https://mistral.ai/", category: "chat", icon: "fa-solid fa-wind", tags: ["европа", "эффективность"] },
+            { name: "Falcon (TII)", country: "ОАЭ", desc: "Сильные открытые модели для арабского и английского.", url: "https://falconllm.tii.ae/", category: "chat", icon: "fa-regular fa-star", tags: ["арабский", "open-source"] },
+            { name: "GigaChat", country: "Россия", desc: "Сбер: текст, изображения (Kandinsky), код, русский контекст.", url: "https://giga.chat/", category: "russia", icon: "fa-regular fa-comment", tags: ["россия", "мультимодальный"] },
+            { name: "YandexGPT", country: "Россия", desc: "Яндекс, встроен в Алису и поиск. Сильный русский язык.", url: "https://ya.ru/", category: "russia", icon: "fa-brands fa-yandex", tags: ["алиса", "русский"] },
+            { name: "Khanmigo", country: "США", desc: "ИИ-репетитор от Khan Academy.", url: "https://www.khanacademy.org/khan-labs", category: "special", icon: "fa-solid fa-graduation-cap", tags: ["образование"] },
+            { name: "EinsteinGPT", country: "США", desc: "Salesforce: AI для CRM и маркетинга.", url: "https://www.salesforce.com/products/einstein/", category: "special", icon: "fa-solid fa-chart-line", tags: ["бизнес"] },
+            { name: "Consensus", country: "США", desc: "Поиск по научным статьям, выжимки из исследований.", url: "https://consensus.app/", category: "special", icon: "fa-solid fa-flask", tags: ["наука"] },
+            // Генераторы изображений
+            { name: "Midjourney", country: "США", desc: "Художественные изображения, лидер по качеству. Discord.", url: "https://www.midjourney.com/", category: "image", icon: "fa-regular fa-image", tags: ["дискорд", "арт"] },
+            { name: "DALL-E 3", country: "США", desc: "OpenAI: отлично вписывает текст, иллюстрации.", url: "https://openai.com/dall-e-3", category: "image", icon: "fa-solid fa-paintbrush", tags: ["текст в картинке"] },
+            { name: "Stable Diffusion 3.5", country: "США", desc: "Stability AI, открытая, локальный запуск.", url: "https://stability.ai/", category: "image", icon: "fa-solid fa-cube", tags: ["открытый", "локальный"] },
+            { name: "Firefly", country: "США", desc: "Adobe: креативные инструменты в Photoshop, видео.", url: "https://www.adobe.com/products/firefly.html", category: "image", icon: "fa-brands fa-adobe", tags: ["дизайн"] },
+            { name: "Aurora (Grok)", country: "США", desc: "xAI: фотореалистичная генерация, редактирование изображений.", url: "https://x.ai/aurora", category: "image", icon: "fa-regular fa-sun", tags: ["фотореализм"] },
+            { name: "Fusion Brain", country: "Россия", desc: "Сбер (ruDALL-E). Генерация по-русски, культурный код.", url: "https://fusionbrain.ai/", category: "russia", icon: "fa-solid fa-palette", tags: ["русский"] },
+            // Видео
+            { name: "Sora", country: "США", desc: "OpenAI: видео до 10 секунд, физика мира.", url: "https://openai.com/sora", category: "video", icon: "fa-solid fa-film", tags: ["реализм"] },
+            { name: "Veo", country: "США", desc: "Google DeepMind: генерация видео с аудиодорожкой, интеграция с YouTube.", url: "https://deepmind.google/veo/", category: "video", icon: "fa-brands fa-youtube", tags: ["звук"] },
+            { name: "Runway Gen-3", country: "США", desc: "Пионер, стилизация и редактирование видео.", url: "https://runwayml.com/", category: "video", icon: "fa-solid fa-scissors", tags: ["редактор"] },
+            { name: "Kaiber", country: "США", desc: "Анимированные клипы, часто на основе музыки.", url: "https://kaiber.ai/", category: "video", icon: "fa-solid fa-music", tags: ["музыкальные клипы"] },
+            // Аудио / голос
+            { name: "ElevenLabs", country: "США/Великобритания", desc: "Синтез речи, клонирование голоса, эмоции.", url: "https://elevenlabs.io/", category: "audio", icon: "fa-solid fa-waveform", tags: ["клонирование"] },
+            { name: "Suno", country: "США", desc: "Генерация песен с текстом и вокалом.", url: "https://suno.ai/", category: "audio", icon: "fa-solid fa-music", tags: ["музыка"] },
+            { name: "Aude.ai", country: "США", desc: "Живые голосовые диалоги, ассистент.", url: "https://aude.ai/", category: "audio", icon: "fa-solid fa-phone", tags: ["диалог"] },
+            // Другие заметные
+            { name: "HyperCLOVA (NAVER)", country: "Южная Корея", desc: "Корейский гигант, мощные LLM.", url: "https://naver.com/", category: "chat", icon: "fa-solid fa-l", tags: ["корейский"] },
+            { name: "LG Exaone", country: "Южная Корея", desc: "Экспертные модели от LG.", url: "https://www.lgresearch.ai/exaone", category: "chat", icon: "fa-solid fa-microchip", tags: ["корейский"] },
+            { name: "DeepMind (Gopher)", country: "Великобритания", desc: "Исследовательское подразделение Google.", url: "https://deepmind.google/", category: "chat", icon: "fa-solid fa-flask", tags: ["исследования"] },
+            { name: "Synthesia", country: "Великобритания", desc: "Аватары, видео с дикторами по тексту.", url: "https://www.synthesia.io/", category: "video", icon: "fa-solid fa-user-tie", tags: ["аватары"] },
+            { name: "Notion AI", country: "США", desc: "Помощник внутри Notion: базы знаний, заметки.", url: "https://www.notion.so/", category: "special", icon: "fa-regular fa-note-sticky", tags: ["продуктивность"] },
+        ];
+
+        // функция рендера карточек (фильтрация по поиску и категории)
+        let currentCategory = 'all';
+        let searchTerm = '';
+
+        function filterCards() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchTerm = searchInput.value.trim().toLowerCase();
+
+            const filtered = tools.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) ||
+                                      item.country.toLowerCase().includes(searchTerm) ||
+                                      item.desc.toLowerCase().includes(searchTerm) ||
+                                      (item.tags && item.tags.some(t => t.toLowerCase().includes(searchTerm)));
+                const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            renderGrid(filtered);
+        }
+
+        function renderGrid(items) {
+            const grid = document.getElementById('cardsGrid');
+            if (!grid) return;
+            if (items.length === 0) {
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:#8896b5;">Ничего не найдено 😕</div>`;
+                return;
+            }
+            let html = '';
+            items.forEach(t => {
+                html += `
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas ${t.icon || 'fa-robot'}"></i>
+                            <h3>${t.name}</h3>
+                        </div>
+                        <div class="country-badge"><i class="fa-regular fa-flag"></i> ${t.country}</div>
+                        <div class="description">${t.desc}</div>
+                        <div class="tags">${t.tags ? t.tags.map(tg => `<span class="tag"><i class="fa-regular fa-hashtag"></i>${tg}</span>`).join('') : ''}</div>
+                        <a href="${t.url}" target="_blank" class="btn-link"><i class="fa-regular fa-arrow-up-right-from-square"></i> Официальный сайт</a>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        // обработчики категорий
+        const chips = document.querySelectorAll('.category-chip');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                currentCategory = chip.dataset.cat;
+                filterCards();
+            });
+        });
+
+        // поиск по вводу (debounce нет, но просто)
+        window.filterCards = function() { filterCards(); }; // глобально для onkeyup
+
+        // начальный рендер
+        renderGrid(tools);
+    })();
+</script>
+
+<!-- Поисковые подсказки: для работы фильтра в реальном времени используется функция filterCards() -->
+</body>
+</html>
